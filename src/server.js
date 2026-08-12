@@ -1,13 +1,18 @@
+require('dotenv').config();
+
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
+
 const authRoutes = require('./routes/auth.routes');
 const usuariosRoutes = require('./routes/usuarios.routes');
 const academicoRoutes = require('./routes/academico.routes');
 const comunicadosRoutes = require('./routes/comunicados.routes');
 
 const app = express();
-const PORT = 3000;
+
+const PORT = process.env.PORT || 3000;
+const SESSION_SECRET = process.env.SESSION_SECRET;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -15,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret: 'intranet-escolar-secret',
+  secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }));
