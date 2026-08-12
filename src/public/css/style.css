@@ -14,9 +14,76 @@ input {
   font: inherit;
 }
 
+button {
+  cursor: pointer;
+}
+
 .container {
-  width: min(90%, 1100px);
+  width: min(1100px, 92%);
   margin: 0 auto;
+}
+
+header {
+  background: #ffffff;
+  margin: 30px 0;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+header h1 {
+  margin-top: 0;
+}
+
+section {
+  background: #ffffff;
+  margin-bottom: 24px;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+button {
+  border: 0;
+  padding: 10px 16px;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+form {
+  display: grid;
+  gap: 16px;
+  max-width: 400px;
+}
+
+form div {
+  display: grid;
+  gap: 6px;
+}
+
+article {
+  padding: 16px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+article:last-child {
+  border-bottom: 0;
 }
 
 .hidden {
