@@ -1,6 +1,10 @@
 const usuarioInfo = document.getElementById('usuarioInfo');
 const usuariosContainer = document.getElementById('usuarios');
 const comunicadosContainer = document.getElementById('comunicados');
+const usuarioForm = document.getElementById('usuarioForm');
+const comunicadoForm = document.getElementById('comunicadoForm');
+const usuarioMensaje = document.getElementById('usuarioMensaje');
+const comunicadoMensaje = document.getElementById('comunicadoMensaje');
 const logoutBtn = document.getElementById('logoutBtn');
 
 async function cargarSesion() {
@@ -28,7 +32,8 @@ async function cargarUsuarios() {
   const response = await fetch('/api/usuarios');
 
   if (!response.ok) {
-    usuariosContainer.textContent = 'No se pudieron cargar los usuarios.';
+    usuariosContainer.textContent =
+      'No se pudieron cargar los usuarios.';
     return;
   }
 
@@ -71,6 +76,72 @@ async function cargarComunicados() {
     comunicadosContainer.appendChild(elemento);
   });
 }
+
+usuarioForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  usuarioMensaje.textContent = '';
+
+  const datos = {
+    nombre: document.getElementById('nombre').value.trim(),
+    usuario: document.getElementById('usuario').value.trim(),
+    contrasena: document.getElementById('contrasena').value,
+    rol: document.getElementById('rol').value
+  };
+
+  const response = await fetch('/api/usuarios', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(datos)
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    usuarioMensaje.textContent = data.error;
+    return;
+  }
+
+  usuarioMensaje.textContent = 'Usuario creado correctamente.';
+  usuarioForm.reset();
+
+  await cargarUsuarios();
+});
+
+comunicadoForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  comunicadoMensaje.textContent = '';
+
+  const datos = {
+    titulo: document.getElementById('titulo').value.trim(),
+    contenido: document.getElementById('contenido').value.trim()
+  };
+
+  const response = await fetch('/api/comunicados', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(datos)
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    comunicadoMensaje.textContent = data.error;
+    return;
+  }
+
+  comunicadoMensaje.textContent =
+    'Comunicado publicado correctamente.';
+
+  comunicadoForm.reset();
+
+  await cargarComunicados();
+});
 
 logoutBtn.addEventListener('click', async () => {
   await fetch('/api/auth/logout', {
