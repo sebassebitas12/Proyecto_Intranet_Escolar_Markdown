@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "estudianteId": 3,
+    "fecha": "2026-08-03",
+    "estado": "presente",
+    "docente": "docente1"
+  },
+  {
+    "id": 2,
+    "estudianteId": 3,
+    "fecha": "2026-08-04",
+    "estado": "ausente",
+    "docente": "docente1"
+  },
+  {
+    "id": 3,
+    "estudianteId": 3,
+    "fecha": "2026-08-05",
+    "estado": "presente",
+    "docente": "docente1"
+  }
+]
