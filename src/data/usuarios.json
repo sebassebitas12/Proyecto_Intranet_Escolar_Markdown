@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nombre": "Carlos Méndez",
+    "usuario": "admin",
+    "contrasena": "admin123",
+    "rol": "admin"
+  },
+  {
+    "id": 2,
+    "nombre": "Laura Jiménez",
+    "usuario": "docente1",
+    "contrasena": "docente123",
+    "rol": "docente"
+  },
+  {
+    "id": 3,
+    "nombre": "María Rodríguez",
+    "usuario": "familia1",
+    "contrasena": "familia123",
+    "rol": "familia"
+  }
+]
