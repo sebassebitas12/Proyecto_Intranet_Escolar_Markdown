@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "nombre": "Carlos Méndez",
+    "usuario": "admin",
+    "contrasena": "$2b$10$t2K399oLDs70eF1SqBYq6ezqEsNsRHc.eOybixfbmhDzAeoArpOSm",
+    "rol": "admin"
+  },
+  {
+    "id": 2,
+    "nombre": "Laura Jiménez",
+    "usuario": "docente1",
+    "contrasena": "$2b$10$QtGuY5Oq8Sv7MazBTA9Uh.sJijmc/KWJwK4EbTEusD/WH6Xm3/KmS",
+    "rol": "docente"
+  },
+  {
+    "id": 3,
+    "nombre": "María Rodríguez",
+    "usuario": "familia1",
+    "contrasena": "$2b$10$F7Pvq6M7CQmcvQVJZJ.OceNhuyM.Uncndi86O5PFgWuxzhlzyPwGO",
+    "rol": "familia"
+  },
+  {
+    "id": 4,
+    "nombre": "sebas",
+    "usuario": "sebitas",
+    "contrasena": "$2b$10$RCFV4uVQ5M4MzkgW.BumXuDxXsh34gW4z3g61dAyk0s0QyryWMxm2",
+    "rol": "admin"
+  }
+]

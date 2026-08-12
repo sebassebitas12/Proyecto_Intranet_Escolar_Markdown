@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Intranet Escolar - Familia</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+  <main class="container">
+
+    <header>
+      <h1>Panel Familiar</h1>
+
+      <p id="usuarioInfo"></p>
+
+      <button type="button" id="logoutBtn">
+        Cerrar sesión
+      </button>
+    </header>
+
+
+    <section aria-labelledby="titulo-calificaciones">
+
+      <h2 id="titulo-calificaciones">
+        Calificaciones
+      </h2>
+
+      <div id="calificaciones">
+        <p>Cargando calificaciones...</p>
+      </div>
+
+      <p
+        id="calificacionesMensaje"
+        role="status"
+        aria-live="polite">
+      </p>
+
+    </section>
+
+
+    <section aria-labelledby="titulo-asistencia">
+
+      <h2 id="titulo-asistencia">
+        Asistencia
+      </h2>
+
+      <div id="asistencia">
+        <p>Cargando asistencia...</p>
+      </div>
+
+      <p
+        id="asistenciaMensaje"
+        role="status"
+        aria-live="polite">
+      </p>
+
+    </section>
+
+
+    <section aria-labelledby="titulo-comunicados">
+
+      <h2 id="titulo-comunicados">
+        Comunicados
+      </h2>
+
+      <div id="comunicados">
+        <p>Cargando comunicados...</p>
+      </div>
+
+      <p
+        id="comunicadosMensaje"
+        role="status"
+        aria-live="polite">
+      </p>
+
+    </section>
+
+  </main>
+
+ <footer>
+    <p>Intranet Escolar</p>
+    <p>Sistema de gestión académica y comunicación escolar.</p>
+  </footer>
+
+  <script src="/js/dashboard-familia.js"></script>
+
+</body>
+</html>
