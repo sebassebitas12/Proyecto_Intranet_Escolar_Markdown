@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "estudianteId": 3,
+    "materia": "Matemáticas",
+    "nota": 85,
+    "periodo": "I Trimestre 2026",
+    "docente": "docente1"
+  },
+  {
+    "id": 2,
+    "estudianteId": 3,
+    "materia": "Español",
+    "nota": 90,
+    "periodo": "I Trimestre 2026",
+    "docente": "docente1"
+  },
+  {
+    "id": 3,
+    "estudianteId": 3,
+    "materia": "Ciencias",
+    "nota": 78,
+    "periodo": "I Trimestre 2026",
+    "docente": "docente1"
+  }
+]
