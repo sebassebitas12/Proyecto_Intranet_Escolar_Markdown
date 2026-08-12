@@ -8,6 +8,8 @@ const router = express.Router();
 
 const usuariosPath = path.join(__dirname, '../data/usuarios.json');
 
+const ROLES_VALIDOS = ['admin', 'docente', 'familia'];
+
 function leerUsuarios() {
   return JSON.parse(fs.readFileSync(usuariosPath, 'utf8'));
 }
@@ -24,7 +26,9 @@ function guardarUsuarios(usuarios) {
 router.get('/', requireRole('admin'), (req, res) => {
   const usuarios = leerUsuarios();
 
-  const usuariosPublicos = usuarios.map(({ contrasena, ...usuario }) => usuario);
+  const usuariosPublicos = usuarios.map(
+    ({ contrasena, ...usuario }) => usuario
+  );
 
   res.json(usuariosPublicos);
 });
@@ -36,6 +40,12 @@ router.post('/', requireRole('admin'), async (req, res) => {
   if (!nombre || !usuario || !contrasena || !rol) {
     return res.status(400).json({
       error: 'Todos los campos son obligatorios'
+    });
+  }
+
+  if (!ROLES_VALIDOS.includes(rol)) {
+    return res.status(400).json({
+      error: 'Rol no válido'
     });
   }
 
@@ -79,6 +89,12 @@ router.put('/:id', requireRole('admin'), async (req, res) => {
     });
   }
 
+  if (rol && !ROLES_VALIDOS.includes(rol)) {
+    return res.status(400).json({
+      error: 'Rol no válido'
+    });
+  }
+
   if (usuario) {
     const usuarioExiste = usuarios.some(
       (item) => item.usuario === usuario && item.id !== id
@@ -115,6 +131,12 @@ router.put('/:id', requireRole('admin'), async (req, res) => {
 // Eliminar usuario
 router.delete('/:id', requireRole('admin'), (req, res) => {
   const id = Number(req.params.id);
+
+  if (id === req.session.user.id) {
+    return res.status(400).json({
+      error: 'No puedes eliminar tu propio usuario'
+    });
+  }
 
   const usuarios = leerUsuarios();
   const indice = usuarios.findIndex((item) => item.id === id);
