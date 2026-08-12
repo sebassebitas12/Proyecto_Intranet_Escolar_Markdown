@@ -8,28 +8,193 @@
 </head>
 
 <body>
+
   <main class="container">
+
     <header>
       <h1>Panel Docente</h1>
+
       <p id="usuarioInfo"></p>
-      <button id="logoutBtn">Cerrar sesión</button>
+
+      <button type="button" id="logoutBtn">
+        Cerrar sesión
+      </button>
     </header>
+
+
+    <!-- CALIFICACIONES -->
 
     <section>
       <h2>Calificaciones</h2>
+
       <div id="calificaciones">
         <p>Cargando calificaciones...</p>
       </div>
     </section>
 
+
+    <section>
+      <h2>Registrar calificación</h2>
+
+      <form id="calificacionForm">
+
+        <div>
+          <label for="calificacionEstudianteId">
+            ID del estudiante
+          </label>
+
+          <input
+            type="number"
+            id="calificacionEstudianteId"
+            min="1"
+            required
+          >
+        </div>
+
+        <div>
+          <label for="calificacionMateria">
+            Materia
+          </label>
+
+          <input
+            type="text"
+            id="calificacionMateria"
+            required
+          >
+        </div>
+
+        <div>
+          <label for="calificacionNota">
+            Nota
+          </label>
+
+          <input
+            type="number"
+            id="calificacionNota"
+            min="0"
+            max="100"
+            step="0.01"
+            required
+          >
+        </div>
+
+        <div>
+          <label for="calificacionPeriodo">
+            Periodo
+          </label>
+
+          <input
+            type="text"
+            id="calificacionPeriodo"
+            placeholder="I Trimestre 2026"
+            required
+          >
+        </div>
+
+        <button type="submit">
+          Registrar calificación
+        </button>
+
+      </form>
+
+      <p
+        id="calificacionMensaje"
+        role="status"
+        aria-live="polite">
+      </p>
+    </section>
+
+
+    <!-- ASISTENCIA -->
+
     <section>
       <h2>Asistencia</h2>
+
       <div id="asistencia">
         <p>Cargando asistencia...</p>
       </div>
     </section>
+
+
+    <section>
+      <h2>Registrar asistencia</h2>
+
+      <form id="asistenciaForm">
+
+        <div>
+          <label for="asistenciaEstudianteId">
+            ID del estudiante
+          </label>
+
+          <input
+            type="number"
+            id="asistenciaEstudianteId"
+            min="1"
+            required
+          >
+        </div>
+
+        <div>
+          <label for="asistenciaFecha">
+            Fecha
+          </label>
+
+          <input
+            type="date"
+            id="asistenciaFecha"
+            required
+          >
+        </div>
+
+        <div>
+          <label for="asistenciaEstado">
+            Estado
+          </label>
+
+          <select
+            id="asistenciaEstado"
+            required>
+
+            <option value="">
+              Seleccione un estado
+            </option>
+
+            <option value="presente">
+              Presente
+            </option>
+
+            <option value="ausente">
+              Ausente
+            </option>
+
+            <option value="tardanza">
+              Tardanza
+            </option>
+
+          </select>
+        </div>
+
+        <button type="submit">
+          Registrar asistencia
+        </button>
+
+      </form>
+
+      <p
+        id="asistenciaMensaje"
+        role="status"
+        aria-live="polite">
+      </p>
+    </section>
+
   </main>
 
+  <footer>
+    <p>Intranet Escolar</p>
+    <p>Sistema de gestión académica y comunicación escolar.</p>
+  </footer>
+
   <script src="/js/dashboard-docente.js"></script>
+
 </body>
-</html> 
+</html>

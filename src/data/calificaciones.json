@@ -22,5 +22,13 @@
     "nota": 78,
     "periodo": "I Trimestre 2026",
     "docente": "docente1"
+  },
+  {
+    "id": 4,
+    "estudianteId": 22312,
+    "materia": "mate",
+    "nota": 98,
+    "periodo": "2er qwqee",
+    "docente": "docente1"
   }
 ]

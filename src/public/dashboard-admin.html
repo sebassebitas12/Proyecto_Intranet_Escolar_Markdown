@@ -1,91 +1,96 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Intranet Escolar - Administración</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intranet Escolar - Administración</title>
+    <link rel="stylesheet" href="/css/style.css">
+    </head>
 
-<body>
-  <main class="container">
-    <header>
-      <h1>Panel de Administración</h1>
-      <p id="usuarioInfo"></p>
-      <button id="logoutBtn">Cerrar sesión</button>
-    </header>
+    <body>
+    <main class="container">
+        <header>
+        <h1>Panel de Administración</h1>
+        <p id="usuarioInfo"></p>
+        <button id="logoutBtn">Cerrar sesión</button>
+        </header>
 
-    <section>
-      <h2>Crear usuario</h2>
+        <section>
+        <h2>Crear usuario</h2>
 
-      <form id="usuarioForm">
-        <div>
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" required>
-        </div>
+        <form id="usuarioForm">
+            <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" required>
+            </div>
 
-        <div>
-          <label for="usuario">Usuario</label>
-          <input type="text" id="usuario" required>
-        </div>
+            <div>
+            <label for="usuario">Usuario</label>
+            <input type="text" id="usuario" required>
+            </div>
 
-        <div>
-          <label for="contrasena">Contraseña</label>
-          <input type="password" id="contrasena" required>
-        </div>
+            <div>
+            <label for="contrasena">Contraseña</label>
+            <input type="password" id="contrasena" required>
+            </div>
 
-        <div>
-          <label for="rol">Rol</label>
-          <select id="rol" required>
-            <option value="">Seleccionar</option>
-            <option value="admin">Administración</option>
-            <option value="docente">Docente</option>
-            <option value="familia">Familia</option>
-          </select>
-        </div>
+            <div>
+            <label for="rol">Rol</label>
+            <select id="rol" required>
+                <option value="">Seleccionar</option>
+                <option value="admin">Administración</option>
+                <option value="docente">Docente</option>
+                <option value="familia">Familia</option>
+            </select>
+            </div>
 
-        <button type="submit">Crear usuario</button>
-        <p id="usuarioMensaje"></p>
-      </form>
-    </section>
-
-<section>
-  <h2>Usuarios</h2>
-
-  <div id="usuarios">
-    <p>Cargando usuarios...</p>
-  </div>
-
-  <p id="usuarioAccionMensaje" role="status"></p>
-</section>
+            <button type="submit">Crear usuario</button>
+            <p id="usuarioMensaje"></p>
+        </form>
+        </section>
 
     <section>
-      <h2>Crear comunicado</h2>
+    <h2>Usuarios</h2>
 
-      <form id="comunicadoForm">
-        <div>
-          <label for="titulo">Título</label>
-          <input type="text" id="titulo" required>
-        </div>
+    <div id="usuarios">
+        <p>Cargando usuarios...</p>
+    </div>
 
-        <div>
-          <label for="contenido">Contenido</label>
-          <textarea id="contenido" rows="5" required></textarea>
-        </div>
-
-        <button type="submit">Publicar comunicado</button>
-        <p id="comunicadoMensaje"></p>
-      </form>
+    <p id="usuarioAccionMensaje" role="status"></p>
     </section>
 
-    <section>
-      <h2>Comunicados</h2>
-      <div id="comunicados">
-        <p>Cargando comunicados...</p>
-      </div>
-    </section>
-  </main>
+        <section>
+        <h2>Crear comunicado</h2>
 
-  <script src="/js/dashboard-admin.js"></script>
-</body>
-</html>
+        <form id="comunicadoForm">
+            <div>
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" required>
+            </div>
+
+            <div>
+            <label for="contenido">Contenido</label>
+            <textarea id="contenido" rows="5" required></textarea>
+            </div>
+
+            <button type="submit">Publicar comunicado</button>
+            <p id="comunicadoMensaje"></p>
+        </form>
+        </section>
+
+        <section>
+        <h2>Comunicados</h2>
+        <div id="comunicados">
+            <p>Cargando comunicados...</p>
+        </div>
+        </section>
+    </main>
+
+    <footer>
+    <p>Intranet Escolar</p>
+    <p>Sistema de gestión académica y comunicación escolar.</p>
+  </footer>
+
+    <script src="/js/dashboard-admin.js"></script>
+    </body>
+    </html>

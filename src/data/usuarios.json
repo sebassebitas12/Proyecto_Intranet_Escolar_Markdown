@@ -19,5 +19,12 @@
     "usuario": "familia1",
     "contrasena": "$2b$10$F7Pvq6M7CQmcvQVJZJ.OceNhuyM.Uncndi86O5PFgWuxzhlzyPwGO",
     "rol": "familia"
+  },
+  {
+    "id": 4,
+    "nombre": "sebas",
+    "usuario": "sebitas",
+    "contrasena": "$2b$10$RCFV4uVQ5M4MzkgW.BumXuDxXsh34gW4z3g61dAyk0s0QyryWMxm2",
+    "rol": "admin"
   }
 ]

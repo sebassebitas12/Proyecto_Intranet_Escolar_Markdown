@@ -19,5 +19,12 @@
     "fecha": "2026-08-05",
     "estado": "presente",
     "docente": "docente1"
+  },
+  {
+    "id": 4,
+    "estudianteId": 3213,
+    "fecha": "1321-02-12",
+    "estado": "presente",
+    "docente": "docente1"
   }
 ]
