@@ -1,33 +1,3 @@
-const usuarioInfo = document.getElementById('usuarioInfo');
-const usuariosContainer = document.getElementById('usuarios');
-const comunicadosContainer = document.getElementById('comunicados');
-const usuarioForm = document.getElementById('usuarioForm');
-const comunicadoForm = document.getElementById('comunicadoForm');
-const usuarioMensaje = document.getElementById('usuarioMensaje');
-const comunicadoMensaje = document.getElementById('comunicadoMensaje');
-const logoutBtn = document.getElementById('logoutBtn');
-
-async function cargarSesion() {
-  const response = await fetch('/api/auth/me');
-
-  if (!response.ok) {
-    window.location.href = '/login.html';
-    return null;
-  }
-
-  const data = await response.json();
-
-  if (data.user.rol !== 'admin') {
-    window.location.href = '/login.html';
-    return null;
-  }
-
-  usuarioInfo.textContent =
-    `Usuario: ${data.user.nombre} (${data.user.rol})`;
-
-  return data.user;
-}
-
 async function cargarUsuarios() {
   const response = await fetch('/api/usuarios');
 
@@ -42,124 +12,136 @@ async function cargarUsuarios() {
   usuariosContainer.innerHTML = '';
 
   usuarios.forEach((usuario) => {
-    const elemento = document.createElement('p');
+    const elemento = document.createElement('div');
 
-    elemento.textContent =
-      `${usuario.nombre} — ${usuario.usuario} — ${usuario.rol}`;
+    elemento.innerHTML = `
+      <p>
+        <strong>${usuario.nombre}</strong>
+        — ${usuario.usuario}
+        — ${usuario.rol}
+      </p>
+
+      <button type="button"
+        onclick="editarUsuario(${usuario.id}, '${usuario.nombre.replace(/'/g, "\\'")}')">
+        Editar
+      </button>
+
+      <button type="button"
+        onclick="mostrarEliminar(${usuario.id})">
+        Eliminar
+      </button>
+
+      <div id="eliminar-${usuario.id}" class="hidden">
+        <p>¿Eliminar este usuario?</p>
+
+        <button type="button"
+          onclick="eliminarUsuario(${usuario.id})">
+          Sí, eliminar
+        </button>
+
+        <button type="button"
+          onclick="cancelarEliminar(${usuario.id})">
+          Cancelar
+        </button>
+      </div>
+
+      <hr>
+    `;
 
     usuariosContainer.appendChild(elemento);
   });
 }
 
-async function cargarComunicados() {
-  const response = await fetch('/api/comunicados');
+function editarUsuario(id, nombreActual) {
+  const mensaje = document.getElementById('usuarioAccionMensaje');
 
-  if (!response.ok) {
-    comunicadosContainer.textContent =
-      'No se pudieron cargar los comunicados.';
+  mensaje.innerHTML = `
+    <label for="nuevoNombre">
+      Nuevo nombre
+    </label>
+
+    <input
+      type="text"
+      id="nuevoNombre"
+      value="${nombreActual.replace(/"/g, '&quot;')}"
+    >
+
+    <button type="button" onclick="guardarEdicion(${id})">
+      Guardar
+    </button>
+
+    <button type="button" onclick="cancelarEdicion()">
+      Cancelar
+    </button>
+  `;
+
+  document.getElementById('nuevoNombre').focus();
+}
+
+async function guardarEdicion(id) {
+  const input = document.getElementById('nuevoNombre');
+  const mensaje = document.getElementById('usuarioAccionMensaje');
+
+  if (!input.value.trim()) {
+    mensaje.textContent = 'El nombre no puede estar vacío.';
     return;
   }
 
-  const comunicados = await response.json();
-
-  comunicadosContainer.innerHTML = '';
-
-  comunicados.forEach((comunicado) => {
-    const elemento = document.createElement('article');
-
-    elemento.innerHTML = `
-      <h3>${comunicado.titulo}</h3>
-      <p>${comunicado.contenido}</p>
-      <small>${comunicado.fecha}</small>
-    `;
-
-    comunicadosContainer.appendChild(elemento);
-  });
-}
-
-usuarioForm.addEventListener('submit', async (event) => {
-  event.preventDefault();
-
-  usuarioMensaje.textContent = '';
-
-  const datos = {
-    nombre: document.getElementById('nombre').value.trim(),
-    usuario: document.getElementById('usuario').value.trim(),
-    contrasena: document.getElementById('contrasena').value,
-    rol: document.getElementById('rol').value
-  };
-
-  const response = await fetch('/api/usuarios', {
-    method: 'POST',
+  const response = await fetch(`/api/usuarios/${id}`, {
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(datos)
+    body: JSON.stringify({
+      nombre: input.value.trim()
+    })
   });
 
   const data = await response.json();
 
   if (!response.ok) {
-    usuarioMensaje.textContent = data.error;
+    mensaje.textContent =
+      data.error || 'No se pudo editar el usuario.';
     return;
   }
 
-  usuarioMensaje.textContent = 'Usuario creado correctamente.';
-  usuarioForm.reset();
+  mensaje.textContent = 'Usuario actualizado correctamente.';
 
   await cargarUsuarios();
-});
+}
 
-comunicadoForm.addEventListener('submit', async (event) => {
-  event.preventDefault();
+function cancelarEdicion() {
+  document.getElementById('usuarioAccionMensaje').textContent = '';
+}
 
-  comunicadoMensaje.textContent = '';
+function mostrarEliminar(id) {
+  const elemento = document.getElementById(`eliminar-${id}`);
 
-  const datos = {
-    titulo: document.getElementById('titulo').value.trim(),
-    contenido: document.getElementById('contenido').value.trim()
-  };
+  elemento.classList.remove('hidden');
+}
 
-  const response = await fetch('/api/comunicados', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(datos)
+function cancelarEliminar(id) {
+  const elemento = document.getElementById(`eliminar-${id}`);
+
+  elemento.classList.add('hidden');
+}
+
+async function eliminarUsuario(id) {
+  const mensaje = document.getElementById('usuarioAccionMensaje');
+
+  const response = await fetch(`/api/usuarios/${id}`, {
+    method: 'DELETE'
   });
 
   const data = await response.json();
 
   if (!response.ok) {
-    comunicadoMensaje.textContent = data.error;
+    mensaje.textContent =
+      data.error || 'No se pudo eliminar el usuario.';
     return;
   }
 
-  comunicadoMensaje.textContent =
-    'Comunicado publicado correctamente.';
-
-  comunicadoForm.reset();
-
-  await cargarComunicados();
-});
-
-logoutBtn.addEventListener('click', async () => {
-  await fetch('/api/auth/logout', {
-    method: 'POST'
-  });
-
-  window.location.href = '/login.html';
-});
-
-async function iniciarDashboard() {
-  const usuario = await cargarSesion();
-
-  if (!usuario) {
-    return;
-  }
+  mensaje.textContent = 'Usuario eliminado correctamente.';
 
   await cargarUsuarios();
-  await cargarComunicados();
 }
-
-iniciarDashboard();
